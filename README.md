@@ -1,6 +1,6 @@
 # AvantStay IoT Monitoring
 
-A plan to watch every AvantStay home the way an onsite guard would. NoiseAware sensors, Ring cameras and booking data get joined up, and a bot does the busywork so agents only handle alerts that need a person.
+A plan to look after every AvantStay home like a good neighbor would. Our noise sensors, cameras and booking details work together, and a helper handles the busywork so our team can focus on people.
 
 - `index.html`: Overview. What this is, why it matters, today vs. tomorrow, a short game, a savings calculator, how it connects, the phased plan and requirements.
 - `about.html`: How the page was made, where the information came from, and how to build something like it.

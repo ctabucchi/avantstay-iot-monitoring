@@ -81,47 +81,47 @@
 
   /* ---------- Game ---------- */
   var CHOICES = [
-    { id: 'leeway', label: 'Give leeway' },
-    { id: 'remind', label: 'Send reminder' },
-    { id: 'escalate', label: 'Call security' },
+    { id: 'leeway', label: 'Let it be' },
+    { id: 'remind', label: 'Send a reminder' },
+    { id: 'escalate', label: 'Call for backup' },
     { id: 'sensor', label: 'Flag the sensor' }
   ];
   var ROUNDS = [
     {
       title: 'Indoor sensor, 14 minutes over the limit',
-      facts: [['Time', '10:40 PM, quiet hours start at 10'], ['Home risk', 'Low'], ['Booking', '6 guests, checked in today'], ['Ring', 'Quiet outside. Voices faint through the door.']],
+      facts: [['Time', '10:40 PM, quiet hours start at 10'], ['Care level', 'Standard'], ['Booking', '6 guests, checked in today'], ['Camera', 'Quiet outside. Voices faint through the door.']],
       level: 62, answer: 'leeway',
-      why: 'Low risk home, noise stays indoors, nothing heard outside. The SOP says extend leeway.',
-      bot: 'Marks it low priority and watches the level. If it drops within 10 minutes, it closes and logs itself. No agent needed.',
+      why: 'A standard home, the noise stays indoors, and nothing carries outside. Our rules say give them some room.',
+      bot: 'Marks it low priority and watches the level. If it drops within 10 minutes, it closes and logs itself. No one needs to step in.',
       botAlone: true
     },
     {
       title: 'Outdoor sensor, 25 minutes over the limit',
-      facts: [['Time', '11:15 PM, quiet hours'], ['Home risk', 'Very High'], ['Booking', '14 guests, Friday night'], ['Ring', 'Loud music and shouting by the pool']],
+      facts: [['Time', '11:15 PM, quiet hours'], ['Care level', 'Highest'], ['Booking', '14 guests, Friday night'], ['Camera', 'Loud music and shouting by the pool']],
       level: 92, answer: 'remind',
-      why: 'Very High risk home with noise you can hear outside. The SOP says send the strongest text and call the guest right away.',
-      bot: 'Puts it at the top of the queue, drafts the text, and starts a 10 minute timer. The agent confirms on Ring and sends.',
+      why: 'A home that needs the most care, with noise you can hear outside. Our rules say text and call the guest right away.',
+      bot: 'Puts it at the top of the queue, drafts the text, and starts a 10 minute timer. A teammate checks the camera and sends.',
       botAlone: false
     },
     {
       title: 'Outdoor sensor, level jumping up and down',
-      facts: [['Time', '2:10 PM'], ['Home risk', 'High'], ['Booking', 'None. Home is empty until Friday.'], ['Ring', 'No motion all day']],
+      facts: [['Time', '2:10 PM'], ['Care level', 'Extra care'], ['Booking', 'None. Home is empty until Friday.'], ['Camera', 'No motion all day']],
       level: 74, answer: 'sensor',
       why: 'No one is staying there. An alert in an empty home is a sign of a bad sensor, wind or traffic.',
-      bot: 'Sees the home is empty, skips the agent, and adds it to the faulty sensor list for repair.',
+      bot: 'Sees the home is empty, lets the team skip it, and adds it to the faulty sensor list for repair.',
       botAlone: true
     },
     {
       title: 'Still loud, 12 minutes after a reminder',
-      facts: [['Time', '12:20 AM'], ['Home risk', 'High'], ['Booking', '10 guests, guest risk High'], ['Ring', 'Crowd in the yard, cars on the street']],
+      facts: [['Time', '12:20 AM'], ['Care level', 'Extra care'], ['Booking', '10 guests, a group that needs extra care'], ['Camera', 'Crowd in the yard, cars on the street']],
       level: 95, answer: 'escalate',
-      why: 'The SOP gives 10 minutes after a reminder. After that, escalate to security or the area manager.',
-      bot: 'Pings the agent the moment the 10 minutes are up and shows the security contact for that market.',
+      why: 'Our rules give guests 10 minutes after a reminder. After that, call security or the area manager for backup.',
+      bot: 'Nudges the team the moment the 10 minutes are up and shows the security contact for that market.',
       botAlone: false
     },
     {
       title: 'Indoor sensor, 20 minutes over, no camera',
-      facts: [['Time', '3:45 AM'], ['Home risk', 'Low'], ['Booking', '4 guests'], ['Ring', 'This home has no Ring camera']],
+      facts: [['Time', '3:45 AM'], ['Care level', 'Standard'], ['Booking', '4 guests'], ['Camera', 'This home has no outdoor camera']],
       level: 70, answer: 'remind',
       why: 'You cannot check by ear, it is the middle of quiet hours, and it has lasted 20 minutes. A gentle reminder is the safe call.',
       bot: 'Shows "no camera" up front so no one hunts for a login. Later, cases like this are good candidates for an automatic first reminder.',
@@ -129,10 +129,10 @@
     },
     {
       title: 'Outdoor sensor, 22 minutes over the limit',
-      facts: [['Time', '2:30 PM, a windy afternoon'], ['Home risk', 'High'], ['Booking', '8 guests, out at the lake'], ['Ring', 'Wind and a leaf blower next door, no guests home']],
+      facts: [['Time', '2:30 PM, a windy afternoon'], ['Care level', 'Extra care'], ['Booking', '8 guests, out at the lake'], ['Camera', 'Wind and a leaf blower next door, no guests home']],
       level: 80, answer: 'leeway',
       why: 'The guests are not even there. This is weather and a neighbor, not a party.',
-      bot: 'Cannot hear Ring, so it still asks a person. It does flag that daytime outdoor alerts at this home are often wind.',
+      bot: 'Cannot hear the cameras, so it still asks a person. It does flag that daytime outdoor alerts at this home are often wind.',
       botAlone: false
     }
   ];
@@ -147,7 +147,7 @@
     function renderRound() {
       var r = ROUNDS[i];
       progress.textContent = 'Alert ' + (i + 1) + ' of ' + ROUNDS.length;
-      scoreEl.textContent = 'Matched the SOP: ' + score;
+      scoreEl.textContent = 'Same call as the team: ' + score;
       var facts = r.facts.map(function (f) { return '<dt>' + f[0] + '</dt><dd>' + f[1] + '</dd>'; }).join('');
       body.innerHTML =
         '<div class="alert-card"><p class="alert-title">' + r.title + '</p>' +
@@ -171,12 +171,12 @@
       btn.classList.add('picked');
       var right = CHOICES.filter(function (c) { return c.id === r.answer; })[0].label;
       var slot = body.querySelector('.verdict-slot');
-      slot.innerHTML = '<div class="verdict"><p class="label" style="margin:0 0 6px">' + (ok ? 'Matches the SOP.' : 'The SOP says: ' + right + '.') + '</p>' +
+      slot.innerHTML = '<div class="verdict"><p class="label" style="margin:0 0 6px">' + (ok ? 'Same call our team would make.' : 'Our team would: ' + right + '.') + '</p>' +
         '<p style="margin:0">' + r.why + '</p>' +
-        '<p class="botline" style="margin:0"><b>What the bot does:</b> ' + r.bot + '</p></div>' +
+        '<p class="botline" style="margin:0"><b>How the helper pitches in:</b> ' + r.bot + '</p></div>' +
         '<p style="margin:16px 0 0"><button type="button" class="btn primary next">' + (i < ROUNDS.length - 1 ? 'Next alert' : 'See results') + '</button></p>';
-      scoreEl.textContent = 'Matched the SOP: ' + score;
-      live.textContent = (ok ? 'Correct. ' : 'Not quite. The SOP says ' + right + '. ') + r.why;
+      scoreEl.textContent = 'Same call as the team: ' + score;
+      live.textContent = (ok ? 'Correct. ' : 'Not quite. Our team would ' + right.toLowerCase() + '. ') + r.why;
       var next = slot.querySelector('.next');
       next.addEventListener('click', function () { i++; if (i < ROUNDS.length) renderRound(); else end(); });
       next.focus();
@@ -184,11 +184,11 @@
 
     function end() {
       progress.textContent = 'Shift over';
-      body.innerHTML = '<div class="verdict" style="margin-top:0"><p class="pull" style="font-size:24px">You matched the SOP on ' + score + ' of ' + ROUNDS.length + ' alerts.</p>' +
-        '<p>The bot could have closed <b>' + botCount + ' of ' + ROUNDS.length + '</b> without anyone listening. For the rest, it did the lookups, so the agent only had to listen and decide.</p>' +
-        '<p style="margin:0">That is the whole idea: keep people on the calls that need judgment, and let the bot do the rest.</p></div>' +
+      body.innerHTML = '<div class="verdict" style="margin-top:0"><p class="pull" style="font-size:24px">You made the same call as our team on ' + score + ' of ' + ROUNDS.length + ' alerts.</p>' +
+        '<p>The helper could have sorted <b>' + botCount + ' of ' + ROUNDS.length + '</b> without anyone listening. For the rest, it did the lookups, so the team only had to listen and decide.</p>' +
+        '<p style="margin:0">That is the whole idea: keep people on the calls that need judgment, and let the helper do the rest.</p></div>' +
         '<p style="margin:16px 0 0"><button type="button" class="btn again">Play again</button></p>';
-      live.textContent = 'Shift over. You matched the SOP on ' + score + ' of ' + ROUNDS.length + '.';
+      live.textContent = 'Shift over. You made the same call as our team on ' + score + ' of ' + ROUNDS.length + '.';
       body.querySelector('.again').addEventListener('click', function () { i = 0; score = 0; botCount = 0; renderRound(); });
       body.querySelector('.again').focus();
     }
@@ -226,7 +226,7 @@
       { n: 'NoiseAware alert', v: 74, c: css('--c1') },
       { n: 'Zendesk ticket or call', v: 15, c: css('--c2') },
       { n: 'Slack post', v: 14, c: css('--c3') },
-      { n: 'Agent spotted it on Ring', v: 9, c: css('--c4') }
+      { n: 'Team spotted it on camera', v: 9, c: css('--c4') }
     ]);
     segbar('seg-outcome', [
       { n: 'Reminder sent to guest', v: 47, c: css('--c1') },

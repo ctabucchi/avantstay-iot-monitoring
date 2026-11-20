@@ -10,16 +10,16 @@
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   var CAPTIONS = {
-    listen: '<b>Listen.</b> NoiseAware sensors sit inside and outside. They flag noise over the limit, but they cannot tell a party from wind, traffic or a broken sensor.',
-    look: '<b>Look.</b> Ring cameras let an agent hear and see the outside of the home, and next door. This is the step that needs a person.',
-    know: '<b>Know.</b> The booking says who is there, how many, and how risky the stay is. Today an agent looks this up by hand for every alert.',
-    decide: '<b>Decide.</b> Give leeway, send a reminder, or escalate to security. The bot gathers everything above so the agent only makes this call.'
+    listen: '<b>Hear.</b> Noise sensors inside and outside notice when things get loud. They cannot tell a party from wind, traffic or a faulty sensor, so they just raise a hand.',
+    look: '<b>Check.</b> A teammate listens in on the outdoor cameras, and next door. This is the part that needs a person.',
+    know: '<b>Understand.</b> Who is staying, how many, and whether this home needs extra care. Today someone looks this up by hand for every alert.',
+    decide: '<b>Help.</b> Let it be, send a friendly reminder, or call for backup. The helper gathers everything first, so the team can focus on the call.'
   };
   var CARDS = {
-    listen: '<b>Outdoor sensor</b>Over the limit for 20 min<br>Level 88, during quiet hours',
-    look: '<b>Ring: back patio</b>Music and voices audible<br>Next door camera: quiet',
-    know: '<b>Booking</b>Fri to Sun, 12 guests<br>Home risk: High. Guest risk: Low',
-    decide: '<b>Agent decision</b>Send reminder 1 by text<br>Recheck in 10 minutes'
+    listen: '<b>Outdoor sensor</b>Loud for 20 minutes<br>After quiet hours began',
+    look: '<b>Back patio camera</b>Music and voices<br>Next door: all quiet',
+    know: '<b>This stay</b>Fri to Sun, 12 guests<br>Home needs extra care',
+    decide: '<b>Team decision</b>Friendly text sent<br>Check back in 10 minutes'
   };
 
   function hasWebGL() {

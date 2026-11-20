@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=4">
+<link rel="stylesheet" href="assets/site.css?v=5">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -29,7 +29,7 @@
   <div class="wrap">
     <p class="eyebrow">About this page</p>
     <h1 id="about-title" style="max-width:20ch">How it was made, and how to make your own.</h1>
-    <p class="lede">One person, a week of notes, and an AI coding assistant. No designers, no engineers, no budget. If you have a repetitive job and a spreadsheet, you can do this too.</p>
+    <p class="lede">One person, a week of notes, and an AI assistant. If your team does the same thing over and over, you can do this too.</p>
   </div>
 </section>
 
@@ -78,10 +78,10 @@
       <p>Every number on the Overview is rounded, and alert examples have details changed. Names of homes, guests and staff are left out on purpose.</p>
     </div>
     <ul class="source-list" style="max-width:820px">
-      <li><b>A shadow session, November 18, 2026</b><span>We sat with the monitoring team for a live shift review, recorded it, and noted every click and tool they touched.</span></li>
+      <li><b>An afternoon with the team, November 18, 2026</b><span>We sat with our monitoring team during a shift review, recorded it, and noted every click and every tool they reached for.</span></li>
       <li><b>The monthly monitoring report</b><span>About 110 incidents the team logged by hand from November 1 to 19: source, risk, outcome.</span></li>
       <li><b>An hourly alert count</b><span>The team's own tally of NoiseAware alerts across all homes for six days in September.</span></li>
-      <li><b>The 2023 noise SOP</b><span>The rules for leeway, reminders and escalation. Some parts are out of date and are being refreshed.</span></li>
+      <li><b>Our 2023 noise playbook</b><span>The rules for when to give room, when to remind, and when to call for backup. Some parts are out of date and are being refreshed.</span></li>
       <li><b>The IoT property map</b><span>A sheet joining every home in NoiseAware to its market, risk tier, sensor status and Ring cameras. About 700 homes.</span></li>
       <li><b>Slack threads</b><span>Where the team discussed the past auto-reminder test and how Alex posts alerts today.</span></li>
       <li><b>NoiseAware's public API docs</b><span>To understand the other way in, if we need it later.</span></li>
@@ -98,20 +98,20 @@
     </div>
     <ol class="steps" style="max-width:820px">
       <li>
-        <h3>Watch someone do the job</h3>
-        <p>Sit in on a real shift. Record it. Write down every tool they open and every time they copy something from one place to another. That copying is your target.</p>
+        <h3>Sit with the people who do the job</h3>
+        <p>Join a real shift. Ask if you can record it. Write down every tool they open and every time they copy something from one place to another. That copying is your target.</p>
       </li>
       <li>
         <h3>Count it</h3>
-        <p>Pull the log they already keep. How many items a day? How many needed action? If most need nothing, a bot can do the sorting.</p>
+        <p>Pull the log they already keep. How many items a day? How many needed action? If most need nothing, a helper can do the sorting.</p>
       </li>
       <li>
         <h3>Write the rules down</h3>
-        <p>Find the SOP, or write one. Turn it into "if this, then that" sentences. Have the team lead check them. A bot is only as good as its rules.</p>
+        <p>Find the playbook, or write one together. Turn it into "if this, then that" sentences. Have the team lead check them. A helper is only as good as its rules.</p>
       </li>
       <li>
         <h3>Build the lookup sheet</h3>
-        <p>Make one Google Sheet that holds what the agent hunts for: one row per home, with risk, camera login name and neighbors. Have the team fill the gaps.</p>
+        <p>Make one Google Sheet that holds what the team hunts for: one row per home, with care level, camera login name and neighbors. Have the team fill the gaps.</p>
       </li>
       <li>
         <h3>Get the alerts into one place</h3>
@@ -119,18 +119,18 @@
       </li>
       <li>
         <h3>Wire it up in Make.com</h3>
-        <p>Make.com (or Zapier) connects apps with drag-and-drop blocks. A first version of this bot is six blocks:</p>
+        <p>Make.com (or Zapier) connects apps with drag-and-drop blocks. A first version of this helper is six blocks:</p>
         <pre><code>1. Slack       Watch new messages in #noise-alerts
 2. Text parser Pull out home name, noise level, minutes
 3. Sheets      Search the property map for that home
-4. Router      Apply the rules: empty home? low risk? very high?
+4. Router      Apply the rules: empty home? needs extra care?
 5. Slack       Reply in a thread with the facts and outcome buttons
 6. Sheets      Add a row to the monthly report</code></pre>
         <p>A second scenario listens for the button tap and updates the row with the outcome.</p>
       </li>
       <li>
-        <h3>Run it in shadow mode first</h3>
-        <p>Let the bot post what it would do, next to what people actually do, for two weeks. Only let it act alone once it agrees at least 9 times out of 10.</p>
+        <h3>Let it practice first</h3>
+        <p>For two weeks, let the helper post what it would do, next to what the team actually does. Only let it act on its own once it makes the same call 9 times out of 10.</p>
       </li>
     </ol>
     <div class="card" style="max-width:820px;margin-top:8px">
