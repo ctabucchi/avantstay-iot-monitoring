@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Watch Every Home | AvantStay IoT Monitoring</title>
+<meta name="description" content="A plan to watch every AvantStay home the way an onsite guard would: noise sensors, Ring cameras and booking data joined up, with a bot doing the busywork so agents only handle alerts that need a person.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css?v=4">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="topbar on-dark">
+  <div class="wrap">
+    <a class="wordmark" href="./">Avant<span>Stay</span><small>IoT Monitoring</small></a>
+    <nav class="topnav" aria-label="Pages">
+      <a href="./" aria-current="page">Overview</a>
+      <a href="about.html">About</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="hero on-dark" aria-labelledby="hero-title" style="padding-top:56px">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <p class="eyebrow">Monitoring and Code Enforcement</p>
+        <h1 id="hero-title">Watch every home like a guard on the block.</h1>
+        <p class="lede">We are on call 24/7 for hundreds of homes. A guard on site would listen, look, know who is staying, and act. This plan joins up our sensors, cameras and booking data so a bot does the busywork and people make the calls.</p>
+        <p class="lede" style="font-size:16px;margin:0">Status: scoping, November 2026. Phase 0 needs no build.</p>
+      </div>
+      <figure style="margin:0">
+        <div class="stage3d" id="house3d">
+          <div class="fallback" hidden>3D view not available in this browser. Use the buttons below to step through each layer.</div>
+          <div class="floating-card" id="house-card" aria-hidden="true"></div>
+        </div>
+        <div class="layer-tabs" role="group" aria-label="Show a layer of the home">
+          <button type="button" data-layer="listen" aria-pressed="true">1. Listen</button>
+          <button type="button" data-layer="look" aria-pressed="false">2. Look</button>
+          <button type="button" data-layer="know" aria-pressed="false">3. Know</button>
+          <button type="button" data-layer="decide" aria-pressed="false">4. Decide</button>
+        </div>
+        <figcaption>
+          <p class="layer-caption" id="layer-caption" aria-live="polite"></p>
+          <p class="hint">Drag the home to turn it.</p>
+        </figcaption>
+      </figure>
+    </div>
+    <ul class="stat-row">
+      <li class="stat"><div class="num">~100</div><div class="label">noise alerts a day across all homes</div></li>
+      <li class="stat"><div class="num">3 in 4</div><div class="label">logged incidents end with no escalation</div></li>
+      <li class="stat"><div class="num">3×</div><div class="label">each incident is typed in by hand</div></li>
+      <li class="stat"><div class="num">~350</div><div class="label">High and Very High risk homes to cover</div></li>
+    </ul>
+  </div>
+</section>
+
+<!-- WHAT -->
+<section aria-labelledby="what-title">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="tag">What is this?</p>
+      <h2 id="what-title">A bot that triages every noise alert, so agents only touch the ones that need a person.</h2>
+      <p>Agents keep one job: listen on Ring and decide. The bot does the rest. It gathers the facts, posts one tidy alert, and writes the log. Later, it sends the first guest reminder on clear cases.</p>
+    </div>
+    <ul class="grid-4">
+      <li class="card">
+        <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 10v4M7 7v10M11 4v16M15 8v8M19 11v2"/></svg></div>
+        <h3>Listen</h3>
+        <p>NoiseAware sensors hear noise inside and out. They raise an alert after 5 or more minutes over the limit.</p>
+        <p class="who">Bot</p>
+      </li>
+      <li class="card">
+        <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></div>
+        <h3>Look</h3>
+        <p>Ring cameras let an agent hear and see the home and next door. Is it a party, wind, or a neighbor?</p>
+        <p class="who" style="color:var(--c1)">Person</p>
+      </li>
+      <li class="card">
+        <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></div>
+        <h3>Know</h3>
+        <p>The booking says who is there, how many, and how risky the stay is. Plus which Ring login and which neighbors to check.</p>
+        <p class="who">Bot</p>
+      </li>
+      <li class="card">
+        <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12l5 5L20 7"/></svg></div>
+        <h3>Decide</h3>
+        <p>Leeway, a reminder, or security. The agent taps one button. The bot logs it everywhere it needs to go.</p>
+        <p class="who" style="color:var(--c1)">Person, then bot</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="alt" aria-labelledby="why-title">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="tag">Why care?</p>
+      <h2 id="why-title">Most of the team's time goes to confirming nothing needs doing.</h2>
+      <p>Alerts pile up at night, when guests party and fewer people are on shift. Most turn out to be fine. Every one still takes a person to look up, listen, and log by hand.</p>
+    </div>
+
+    <div>
+      <div class="chart-card" style="margin-bottom:24px">
+        <h3 id="chart-hours-title">Noise alerts by hour of day</h3>
+        <p class="sub" id="chart-hours-desc">All homes, 6 days in September, Pacific time. 624 alerts, about 100 a day. Night hours are highlighted.</p>
+        <div class="chart" id="chart-hours"></div>
+        <div class="tooltip" role="presentation"></div>
+        <details class="table-view">
+          <summary>Show as a table</summary>
+          <div class="table-scroll" tabindex="0" role="region" aria-label="Alerts by hour table">
+            <table>
+              <thead><tr><th scope="col">Hour</th><th scope="col" class="num">Alerts (6 days)</th></tr></thead>
+              <tbody>
+                <tr><td>12 PM</td><td class="num">25</td></tr><tr><td>1 PM</td><td class="num">29</td></tr><tr><td>2 PM</td><td class="num">20</td></tr><tr><td>3 PM</td><td class="num">21</td></tr><tr><td>4 PM</td><td class="num">26</td></tr><tr><td>5 PM</td><td class="num">16</td></tr><tr><td>6 PM</td><td class="num">23</td></tr><tr><td>7 PM</td><td class="num">26</td></tr><tr><td>8 PM</td><td class="num">25</td></tr><tr><td>9 PM</td><td class="num">46</td></tr><tr><td>10 PM</td><td class="num">33</td></tr><tr><td>11 PM</td><td class="num">34</td></tr><tr><td>12 AM</td><td class="num">34</td></tr><tr><td>1 AM</td><td class="num">29</td></tr><tr><td>2 AM</td><td class="num">21</td></tr><tr><td>3 AM</td><td class="num">22</td></tr><tr><td>4 AM</td><td class="num">22</td></tr><tr><td>5 AM</td><td class="num">25</td></tr><tr><td>6 AM</td><td class="num">20</td></tr><tr><td>7 AM</td><td class="num">19</td></tr><tr><td>8 AM</td><td class="num">25</td></tr><tr><td>9 AM</td><td class="num">32</td></tr><tr><td>10 AM</td><td class="num">27</td></tr><tr><td>11 AM</td><td class="num">24</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+      </div>
+
+      <div class="grid-2">
+        <div class="chart-card" id="seg-source">
+          <h3>Where logged incidents start</h3>
+          <p class="sub">About 110 incidents logged Nov 1 to 19.</p>
+          <div class="segbar" role="group" aria-label="Share of incidents by source"></div>
+          <ul class="legend"></ul>
+        </div>
+        <div class="chart-card" id="seg-outcome">
+          <h3>What happened after a NoiseAware alert</h3>
+          <p class="sub">The 74 logged incidents that started as a noise alert.</p>
+          <div class="segbar" role="group" aria-label="Share of noise alert incidents by outcome"></div>
+          <ul class="legend"></ul>
+          <p class="sub" style="margin:12px 0 0">Many reminders were sent "as a precaution" when Ring was quiet. Clearer context should mean fewer unneeded texts to guests.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-3" style="margin-top:28px">
+      <div class="card"><p class="pull" style="font-size:22px">Pull, not push.</p><p>Agents refresh the NoiseAware dashboard to find alerts. Only a few homes send alerts to Slack.</p></div>
+      <div class="card"><p class="pull" style="font-size:22px">One agent, five alerts.</p><p>That is the most one person can juggle. Busy nights hit 20 to 30 at once and need 2 to 3 agents.</p></div>
+      <div class="card"><p class="pull" style="font-size:22px">The same sensors, again and again.</p><p>One home logged 11 incidents in 19 days. Agents twice wrote "possible faulty sensor." No one owns the fix.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TODAY VS TOMORROW -->
+<section aria-labelledby="compare-title">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="tag">What's better?</p>
+      <h2 id="compare-title">Nine steps today. Three tomorrow.</h2>
+      <p>Same alert, same agent. The difference is who does the lookups and the logging. Times are rough estimates from watching the team work.</p>
+    </div>
+    <ul class="key" aria-label="Key">
+      <li style="--k:var(--bad)">Manual busywork</li>
+      <li style="--k:var(--c1)">Needs a person</li>
+      <li style="--k:var(--good)">Bot does it</li>
+    </ul>
+    <div class="grid-2">
+      <div>
+        <div class="flow-head"><h3>Today</h3><span class="flow-total">About 12 minutes</span></div>
+        <ol class="flow">
+          <li class="manual">Refresh the NoiseAware dashboard to spot a new alert <span class="time">ongoing</span></li>
+          <li class="manual">Open Voyage. Find the booking, guest count and risk <span class="time">2 min</span></li>
+          <li class="manual">Find the right Ring login in a shared sheet <span class="time">1 min</span></li>
+          <li class="human">Listen and look on Ring, and next door <span class="time">3 min</span></li>
+          <li class="human">Decide: leeway, reminder or escalate <span class="time">1 min</span></li>
+          <li class="manual">Send the reminder by hand, if needed <span class="time">1 min</span></li>
+          <li class="manual">Post in the market channel <span class="time">1 min</span></li>
+          <li class="manual">Post again in the daily activity channel <span class="time">1 min</span></li>
+          <li class="manual">Type a row in the monthly report <span class="time">2 min</span></li>
+        </ol>
+      </div>
+      <div>
+        <div class="flow-head"><h3>Tomorrow</h3><span class="flow-total">About 4 minutes</span></div>
+        <ol class="flow">
+          <li class="bot">Alert lands in one channel with booking, risk, Ring login and neighbors attached. Empty homes and bad sensors are filtered out. <span class="time">0 min</span></li>
+          <li class="human">Listen and look on Ring, and next door <span class="time">3 min</span></li>
+          <li class="human">Tap an outcome button in the Slack thread <span class="time">&lt;1 min</span></li>
+          <li class="bot">Bot logs the report row and posts updates. Starts the 10 minute timer if a reminder went out. <span class="time">0 min</span></li>
+        </ol>
+        <div class="card" style="margin-top:16px;border-left:4px solid var(--good)">
+          <p style="margin:0"><b style="color:var(--ink)">Also better:</b> every alert gets a timestamp, so we can finally see response time, catch rate, and which sensors keep crying wolf.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GAME -->
+<section class="alt" aria-labelledby="game-title">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="tag">Try it</p>
+      <h2 id="game-title">You're on the night shift.</h2>
+      <p>Six alerts based on real ones from November, with details changed. Make the call, then see what our rules say and what the bot would do.</p>
+    </div>
+    <div class="game" id="game">
+      <div class="game-top"><span class="progress"></span><span class="score"></span></div>
+      <div class="game-body"></div>
+      <p class="sr-only game-live" aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
+<!-- CALCULATOR -->
+<section aria-labelledby="calc-title">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="tag">Do we save time? Money?</p>
+      <h2 id="calc-title">Yes. Close to one full-time agent's worth of busywork.</h2>
+      <p>These are estimates, not measurements. Move the sliders to match what you know. Phase 1 will give us real timings to replace them.</p>
+    </div>
+    <div class="calc" id="calc">
+      <div>
+        <div class="slider">
+          <label for="c-alerts">Noise alerts a day <output for="c-alerts"></output></label>
+          <input type="range" id="c-alerts" min="20" max="300" step="10" value="100">
+          <p class="note">September sample: about 100.</p>
+        </div>
+        <div class="slider">
+          <label for="c-mins">Minutes to check one alert today <output for="c-mins" ></output></label>
+          <input type="range" id="c-mins" min="1" max="10" step="1" value="4" data-unit=" min">
+          <p class="note">Lookups plus a quick Ring check. Our guess.</p>
+        </div>
+        <div class="slider">
+          <label for="c-share">Alerts the bot clears with no agent <output for="c-share"></output></label>
+          <input type="range" id="c-share" min="0" max="90" step="5" value="50" data-unit="%">
+          <p class="note">Empty homes, short blips, known bad sensors. We will measure this in Phase 2.</p>
+        </div>
+        <div class="slider">
+          <label for="c-incidents">Incidents logged a day <output for="c-incidents"></output></label>
+          <input type="range" id="c-incidents" min="1" max="20" step="1" value="6">
+          <p class="note">November so far: about 6.</p>
+        </div>
+        <div class="slider">
+          <label for="c-logmins">Minutes to log one incident in 3 places <output for="c-logmins"></output></label>
+          <input type="range" id="c-logmins" min="1" max="15" step="1" value="5" data-unit=" min">
+        </div>
+        <div class="slider">
+          <label for="c-cost">Cost of one agent hour <output for="c-cost"></output></label>
+          <input type="range" id="c-cost" min="10" max="60" step="1" value="20" data-pre="$">
+          <p class="note">A placeholder. Use the real loaded rate.</p>
+        </div>
+      </div>
+      <div>
+        <div class="result-grid" aria-live="polite">
+          <div class="result hero-result"><div class="num"><span id="r-day"></span> hours</div><div class="label">of agent time freed up every day</div></div>
+          <div class="result"><div class="num" id="r-month"></div><div class="label">hours a month</div></div>
+          <div class="result"><div class="num" id="r-fte"></div><div class="label">full-time agents' worth</div></div>
+          <div class="result" style="grid-column:1/-1"><div class="num" id="r-year"></div><div class="label">a year, at the hourly cost you set</div></div>
+        </div>
+        <p class="sub" style="margin-top:16px;font-size:14px;color:var(--muted)">How it adds up: alerts x minutes x share the bot clears, plus incidents x logging minutes x 90% (the share of report rows the bot writes in Phase 1). A month is 30 days. A full-time agent is 160 hours a month.</p>
+        <p style="margin:0">The bigger win is not the hours. It is that agents spend their attention on the alerts that matter, at the hours that matter, instead of juggling 20 at once.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="alt" aria-labelledby="how-title">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="tag">How it connects</p>
+      <h2 id="how-title">Build on what already works.</h2>
+      <p>Voyage already gets NoiseAware alerts and matches them to the booking. Its Slack bot, Alex, posts them for a few homes today. Turn that on for every high-risk home, send it to one channel, and let an automation tool like Make.com or Zapier do the rest. No new engineering to start.</p>
+    </div>
+    <figure class="diagram" style="margin:0" tabindex="0" role="region" aria-label="Diagram: how an alert flows">
+      <svg viewBox="0 0 1100 330" role="img" aria-labelledby="dia-title dia-desc">
+        <title id="dia-title">How an alert flows</title>
+        <desc id="dia-desc">NoiseAware sensors send an alert to Voyage, which matches the booking. Alex posts it to one Slack channel. A Make.com scenario reads the post, looks up the property map and applies the rules, then opens a thread for the agent. The agent listens on Ring and taps an outcome. The scenario writes the monthly report row. In Phase 3, it sends the first reminder through Zendesk.</desc>
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#6B6B6C"/></marker>
+        </defs>
+        <g font-size="15" fill="#022B54">
+          <!-- row 1 -->
+          <rect x="10" y="40" width="180" height="96" rx="8" fill="#F4F7FA" stroke="#D9E1E8"/>
+          <text x="100" y="78" text-anchor="middle" font-weight="700">NoiseAware</text>
+          <text x="100" y="100" text-anchor="middle" fill="#505051" font-size="13">sensors in each home</text>
+
+          <rect x="240" y="40" width="180" height="96" rx="8" fill="#F4F7FA" stroke="#D9E1E8"/>
+          <text x="330" y="78" text-anchor="middle" font-weight="700">Voyage + Alex</text>
+          <text x="330" y="100" text-anchor="middle" fill="#505051" font-size="13">matches the booking</text>
+
+          <rect x="470" y="40" width="180" height="96" rx="8" fill="#F4F7FA" stroke="#D9E1E8"/>
+          <text x="560" y="78" text-anchor="middle" font-weight="700">One Slack channel</text>
+          <text x="560" y="100" text-anchor="middle" fill="#505051" font-size="13">every HR and VHR home</text>
+
+          <rect x="700" y="20" width="390" height="136" rx="10" fill="#E6F2F3" stroke="#0C6270" stroke-width="1.5"/>
+          <text x="895" y="48" text-anchor="middle" font-weight="700" fill="#0C6270">Make.com scenario (the bot)</text>
+          <text x="720" y="78" font-size="13.5" fill="#022B54">1. Read the alert: home, level, minutes</text>
+          <text x="720" y="100" font-size="13.5" fill="#022B54">2. Look up risk, Ring login, neighbors</text>
+          <text x="720" y="122" font-size="13.5" fill="#022B54">3. Apply the SOP rules. Filter empty homes</text>
+          <text x="720" y="144" font-size="13.5" fill="#022B54">4. Open a thread with outcome buttons</text>
+
+          <!-- row 2 -->
+          <rect x="700" y="214" width="180" height="96" rx="8" fill="#fff" stroke="#2F5E8C" stroke-width="1.5"/>
+          <text x="790" y="252" text-anchor="middle" font-weight="700">Agent</text>
+          <text x="790" y="274" text-anchor="middle" fill="#505051" font-size="13">listens on Ring, taps one</text>
+
+          <rect x="470" y="214" width="180" height="96" rx="8" fill="#F4F7FA" stroke="#D9E1E8"/>
+          <text x="560" y="252" text-anchor="middle" font-weight="700">Monthly report</text>
+          <text x="560" y="274" text-anchor="middle" fill="#505051" font-size="13">row written for you</text>
+
+          <rect x="240" y="214" width="180" height="96" rx="8" fill="#fff" stroke="#D9E1E8" stroke-dasharray="0"/>
+          <text x="330" y="252" text-anchor="middle" font-weight="700">Zendesk</text>
+          <text x="330" y="274" text-anchor="middle" fill="#505051" font-size="13">first reminder (Phase 3)</text>
+
+          <rect x="930" y="214" width="160" height="96" rx="8" fill="#F4F7FA" stroke="#D9E1E8"/>
+          <text x="1010" y="252" text-anchor="middle" font-weight="700">Property map</text>
+          <text x="1010" y="274" text-anchor="middle" fill="#505051" font-size="13">Google Sheet</text>
+        </g>
+        <g stroke="#6B6B6C" stroke-width="1.5" fill="none" marker-end="url(#arrow)">
+          <path d="M190 88H236"/>
+          <path d="M420 88H466"/>
+          <path d="M650 88H696"/>
+          <path d="M1010 160V210" />
+          <path d="M790 160V210"/>
+          <path d="M700 262H654"/>
+          <path d="M470 262H424"/>
+        </g>
+        <path id="packet-path" d="M100 88H330H560H895V262H560H330" fill="none" stroke="none"/>
+        <circle r="7" fill="#A34E34" class="packet" style="offset-path:path('M100 88H330H560H895V262H560H330')"/>
+      </svg>
+    </figure>
+    <div class="grid-2" style="margin-top:28px">
+      <div class="card">
+        <h3 style="margin-top:0">Why not NoiseAware's own auto-reminder?</h3>
+        <p>We tried it and turned it off. It texted guests every 10 minutes on every alert, including wind and broken sensors. Our version runs our rules first, and a person confirms before any guest hears from us until the bot has earned trust.</p>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">Why not the NoiseAware API?</h3>
+        <p>It is still an option for later. It gives the noise graph and which sensor fired, which helps spot bad sensors. But Alex already does the hard part, matching alerts to bookings, so we start there and add the API only if we need it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHASES -->
+<section class="dark on-dark" aria-labelledby="plan-title">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="tag">The plan</p>
+      <h2 id="plan-title">Four phases. Each one earns the next.</h2>
+      <p>Nothing talks to a guest on its own until it has matched our agents' calls at least 90% of the time.</p>
+    </div>
+    <ol class="phases">
+      <li class="phase">
+        <p class="n">Phase 0. No build</p>
+        <h3>Get the data right</h3>
+        <p>Turn on Alex alerts for every High and Very High home, into one channel. Fill in each home's Ring account and neighbors. Give a risk tier to the homes missing one.</p>
+        <p class="exit"><b>Done when:</b> every high-risk home posts to one channel and has a Ring and neighbor entry.</p>
+      </li>
+      <li class="phase">
+        <p class="n">Phase 1</p>
+        <h3>Triage and log</h3>
+        <p>The bot reads each alert, adds booking, risk, Ring and neighbors, and opens a thread. The agent taps an outcome. The bot writes the report row.</p>
+        <p class="exit"><b>Done when:</b> no one polls the dashboard, and 90% of report rows are written by the bot.</p>
+      </li>
+      <li class="phase">
+        <p class="n">Phase 2</p>
+        <h3>Spot bad sensors</h3>
+        <p>Flag alerts in empty homes, alerts that lag the graph, and flat lines. Draft the reminder text for the agent.</p>
+        <p class="exit"><b>Done when:</b> a faulty sensor list is reviewed weekly and each one has a repair owner.</p>
+      </li>
+      <li class="phase">
+        <p class="n">Phase 3</p>
+        <h3>First reminder, automatic</h3>
+        <p>On clear cases, the bot sends the first guest reminder. It runs for two weeks in a test channel first, saying what it would send.</p>
+        <p class="exit"><b>Done when:</b> it agrees with agents on 90% of cases, then goes live.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- PRD -->
+<section aria-labelledby="prd-title">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="tag">The details</p>
+      <h2 id="prd-title">Requirements, in plain English.</h2>
+    </div>
+    <div class="grid-2">
+      <div>
+        <dl class="prd">
+          <dt>Who it is for</dt>
+          <dd>Monitoring agents on every shift, their lead, and area managers who get escalations.</dd>
+          <dt>Goals</dt>
+          <dd>Agents never poll a dashboard. Every alert arrives with the facts attached. Every incident is logged once, by the bot. Bad sensors get found and fixed.</dd>
+          <dt>Not goals</dt>
+          <dd>Replacing agents. Judging noise from Ring audio. Calling police, the city, or removing guests.</dd>
+          <dt>How we will know it works</dt>
+          <dd>Time from alert to decision. Share of alerts closed with no agent. Share of report rows written by the bot. Reminders sent when Ring was quiet. Number of open faulty sensors.</dd>
+          <dt>The rules it follows</dt>
+          <dd>From our noise SOP. A violation is 5+ minutes over the limit. Stay risk is the higher of home risk and guest risk. Low and Medium get leeway unless neighbors have complained recently. High: check Ring first. Very High: strongest text and a call right away. Wait 10 minutes after a reminder, then escalate.</dd>
+        </dl>
+      </div>
+      <div>
+        <h3 style="font-size:20px;margin-top:16px">Always stays human</h3>
+        <ul class="checklist human">
+          <li>Listening on Ring and judging the noise</li>
+          <li>Calls with the city or police</li>
+          <li>Second reminders and guest removals</li>
+          <li>Neighbor and owner complaints</li>
+        </ul>
+        <h3 style="font-size:20px;margin-top:28px">Risks and how we handle them</h3>
+        <ul class="checklist risk">
+          <li><b>Wrong home data.</b> Some homes share an ID in the source export. We check IDs before the bot uses them.</li>
+          <li><b>Missing risk tiers.</b> About 1 in 7 homes in NoiseAware has none. The owner of risk tiers fills them in Phase 0.</li>
+          <li><b>Rules are out of date.</b> The SOP is from 2023. The team confirms thresholds by market before Phase 1.</li>
+          <li><b>Texting guests by mistake.</b> No automatic texts until shadow mode hits 90% agreement.</li>
+          <li><b>Shared logins.</b> Passwords move out of documents and get rotated.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEXT -->
+<section class="alt" aria-labelledby="next-title">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="tag">What's next</p>
+      <h2 id="next-title">What we need to start.</h2>
+    </div>
+    <ul class="checklist" style="max-width:760px">
+      <li>Product confirms who can turn on Alex noise alerts for every high-risk home, into one channel.</li>
+      <li>The monitoring team fills in Ring accounts, camera names and neighbors for each high-risk home.</li>
+      <li>The owner of risk tiers fills in the homes missing one.</li>
+      <li>The team confirms current noise limits and reminder timing by market.</li>
+      <li>Support confirms the text templates for reminder 1 and reminder 2.</li>
+      <li>Area managers agree how fast a flagged sensor gets fixed.</li>
+    </ul>
+    <p style="margin-top:28px"><a href="about.html">How this page was made, and how to build one like it</a></p>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer on-dark">
+  <div class="wrap">AvantStay Guest Experience. Internal planning page, published for team reference. Numbers are rounded and details are changed for public sharing. <a href="about.html">About this page</a>.</div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+<script src="assets/house3d.js?v=4" defer></script>
+<script src="assets/app.js?v=4" defer></script>
+</body>
+</html>
